@@ -1,0 +1,14 @@
+groups:
+  - name: linux
+    nodes:
+      - my.target1.net
+      - my.target2.net
+      - my.target3.net
+  - name: other
+    nodes:
+      - name: https://<splunk_ip>:8088/services/collector
+        alias: splunk
+        config:
+          transport: remote
+          remote:
+            token: <splunk_token>
