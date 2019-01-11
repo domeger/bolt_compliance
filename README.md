@@ -36,10 +36,10 @@ pip install -r requirements.txt
 
 To use bolt_compliance, you need to create a Splunk HTTP Event Collector token in a Splunk Enterprise instance available to you. See [Splunk HEC Service](https://docs.splunk.com/Documentation/Splunk/latest/Data/UsetheHTTPEventCollector) for guidance.
 
-Then, create a configuration file `splunk-config.yaml`:
+Then, create a configuration file `inventory.yaml`:
 
 ```bash
-cp splunk-config-default.yaml splunk-config.yaml
+cp inventory-default.yaml inventory.yaml
 ```
 
 and configure the Splunk HEC endpoint and token there.
