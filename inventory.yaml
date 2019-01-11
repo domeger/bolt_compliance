@@ -1,6 +1,0 @@
-groups:
-  - name: all_ssh
-    nodes:
-      - uu923jrt9jvs3qm.delivery.puppetlabs.net
-      - in15i3a5lyd9cc9.delivery.puppetlabs.net
-      - wbeb9pol0zny528.delivery.puppetlabs.net

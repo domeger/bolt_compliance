@@ -6,8 +6,6 @@ plan bolt_compliance::run_yaml(
   # we need to do this to enable fact gathering
   apply_prep($nodes)
 
-  $default_task_args = loadyaml('splunk-config.yaml')
-
   notice("Running benchmarks: ${benchmarks}")
 
   $benchmarks.each | $benchmark | {
@@ -41,9 +39,9 @@ plan bolt_compliance::run_yaml(
           command => $bash_commands,
           output => $result['stdout']
         }
-        $task_args = $default_task_args + { data => { event => $result_hash } }
+        $task_args = { data => { event => $result_hash } }
         notice("task args: ${task_args}")
-        $splunk_result = run_task('bolt_compliance::send_to_splunk', 'localhost', $task_args)
+        $splunk_result = run_task('bolt_compliance::send_to_splunk', 'splunk', $task_args)
 
       }
     }
