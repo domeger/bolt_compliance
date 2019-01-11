@@ -26,6 +26,12 @@ git clone https://github.com/timidri/bolt_compliance.git
 cd bolt_compliance
 ```
 
+### Install python requirements
+
+```bash
+pip install -r requirements.txt
+```
+
 ### Configure Splunk
 
 To use bolt_compliance, you need to create a Splunk HTTP Event Collector token in a Splunk Enterprise instance available to you. See [Splunk HEC Service](https://docs.splunk.com/Documentation/Splunk/latest/Data/UsetheHTTPEventCollector) for guidance.
