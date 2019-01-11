@@ -6,8 +6,16 @@ import requests
 
 params = json.load(sys.stdin)
 
-splunk_endpoint = params['splunk_endpoint']
-splunk_token = params['splunk_token']
+print('params: ***')
+print(json.dumps(params))
+print('data: ***')
+print(json.dumps(params['data']))
+
+target = params['_target']
+
+splunk_endpoint = target['uri']
+splunk_token = target['token']
+
 data = params['data']
 
 headers = {
