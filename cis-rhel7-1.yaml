@@ -18,8 +18,7 @@ controls:
       copy of the program. If the program happened to have a security vulnerability, the attacker
       could continue to exploit the known flaw.
     impact: 1.0
-    bash:
-      - mount | grep /tmp > /dev/null
+    command: mount | grep /tmp > /dev/null
   - id: 5.1.1
     name: Ensure cron daemon is enabled
     description: The cron daemon is used to execute batch jobs on the system.
@@ -28,5 +27,4 @@ controls:
       maintenance jobs that may include security monitoring that have to run, and cron is used
       to execute them
     impact: 1.0
-    bash:
-      - systemctl is-enabled crond
+    command: /usr/bin/systemctl is-enabled crond

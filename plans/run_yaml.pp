@@ -4,7 +4,7 @@ plan bolt_compliance::run_yaml(
 ) {
 
   # we need to do this to enable fact gathering
-  apply_prep($nodes)
+  # apply_prep($nodes)
 
   notice("Running benchmarks: ${benchmarks}")
 
@@ -13,19 +13,19 @@ plan bolt_compliance::run_yaml(
     $controls = $benchmark_data['controls']
     $controls.each | $control | {
       notice("Running control: ${control['id']}")
-      $bash_commands = $control['bash'][0]
-      notice("Executing bash tests: \"${bash_commands}\"")
-      $results = run_command($bash_commands, $nodes, '_catch_errors' => true)
+      $run_command = $control['command']
+      notice("Executing run_command: \"${run_command}\"")
+      $results = run_command($run_command, $nodes, '_catch_errors' => true)
       $results.each | $result | {
         notice("Result: ${result}")
         notice("Exit code: ${result['exit_code']}")
         notice("Stdout: ${result['stdout']}")
         notice("Name: ${control['name']}")
-        notice("Description: ${control['description']}")
-        notice("Rationale: ${control['rationale']}")
-        notice("Impact: ${control['impact']}")
+        # notice("Description: ${control['description']}")
+        # notice("Rationale: ${control['rationale']}")
+        # notice("Impact: ${control['impact']}")
 
-        $target_facts = facts($result.target)
+        # $target_facts = facts($result.target)
         $result_hash = $result.value + {
           target => $result.target.name,
           benchmark => $benchmark_data['benchmark'],
@@ -34,13 +34,13 @@ plan bolt_compliance::run_yaml(
           description => $control['description'],
           rationale => $control['rationale'],
           impact => $control['impact'],
-          uptime => $target_facts['uptime'],
+          # uptime => $target_facts['uptime'],
           compliant => $result['exit_code'] == 0,
-          command => $bash_commands,
+          command => $run_command,
           output => $result['stdout']
         }
         $task_args = { data => { event => $result_hash } }
-        notice("task args: ${task_args}")
+        # notice("task args: ${task_args}")
         $splunk_result = run_task('bolt_compliance::send_to_splunk', 'splunk', $task_args)
 
       }

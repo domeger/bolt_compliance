@@ -13,5 +13,10 @@ controls:
       If events are not recorded it may be difficult or impossible to determine the root cause of
       system problems or the unauthorized activities of malicious users.
     impact: 1.0
-    bash:
-      - 'reg query HKLM\SOFTWARE\Policies\Microsoft\WindowsFirewall\PrivateProfile\Logging /v LogDroppedPackets'
+    command: |
+      $LogDroppedPackets = (Get-ItemProperty -Path HKLM:SOFTWARE\Policies\Microsoft\WindowsFirewall\PrivateProfile\Logging).LogDroppedPackets
+      if ($LogDroppedPackets -eq 1) {
+        exit 0
+      } else {
+        exit 1
+      }
